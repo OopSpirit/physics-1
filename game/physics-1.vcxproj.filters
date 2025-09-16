@@ -23,7 +23,7 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Template1.cpp">
+    <ClCompile Include="Lab_1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
