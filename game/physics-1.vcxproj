@@ -300,6 +300,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="Template1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\raylib.ico" />
