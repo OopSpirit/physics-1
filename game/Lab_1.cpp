@@ -5,26 +5,39 @@
 #include "game.h"
 #include <cmath>
 const unsigned int TARGET_FPS = 50;
-float launchAngle = 35.0f;
-float launchSpeed = 400.0f;
-float launchPositionX = 500.0f;
-float launchPositionY = 400.0f;
+float dt = 1.0f / TARGET_FPS;
+float time = 0;
+float angle = 35.0f;
+float speed = 400.0f;
+
+void update() {
+    dt = 1.0f / TARGET_FPS;
+    time += dt;
+}
 void Draw() {
-    float launchAngleRadian = launchAngle * PI / 180.0f; // because sin cos in C++ use radian to calculate
-    float vx = launchSpeed * cos(launchAngleRadian);
-    float vy = launchSpeed * -sin(launchAngleRadian);
+   
     BeginDrawing();
     ClearBackground(BLACK);
-    DrawLineV({ launchPositionX, launchPositionY }, { launchPositionX + vx, launchPositionY + vy }, RED);
-    DrawText(TextFormat("Position: {%.1f, %.1f}", launchPositionX, launchPositionY), 30, 20, 30, WHITE);
-    DrawText(TextFormat("Angle: %.1f degree", launchAngle), 30, 50, 30, WHITE);
-    DrawText(TextFormat("Speed: %.1f m/s", launchSpeed), 30, 80, 30, WHITE);
+    DrawText("Doan Vu Duy Thien 101533849", 10, float(GetScreenHeight() - 50), 30, WHITE);
+
+    GuiSliderBar(Rectangle{ 10,15,1000,20 }, "", TextFormat("%.2f", time), &time, 0, 240);
+    DrawText(TextFormat("Time: %6.2f", time), GetScreenWidth() - 180, 10, 30, WHITE);
+
+    GuiSliderBar(Rectangle{ 10,100,200,100 }, "", TextFormat("Speed: %.0f", speed), &speed, -100, 1000);
+    GuiSliderBar(Rectangle{ 10,200,200,100 }, "", TextFormat("Angle: %.0f", angle), &angle, -180, 180);
+
+    Vector2 startPos = { 200, GetScreenHeight() - 200 };
+    Vector2 velocity = { cos(angle * DEG2RAD) * speed, -sin(angle * DEG2RAD) * speed };
+
+    DrawLineEx(startPos, startPos + velocity, 5, RED);
+    
     EndDrawing();
 }
 int main() {
     InitWindow(InitialWidth, InitialHeight, "Rendering Launch Vector");
     SetTargetFPS(TARGET_FPS);
     while (!WindowShouldClose()) {
+        update();
         Draw();
     }
     CloseWindow();
