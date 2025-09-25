@@ -299,6 +299,7 @@
     <ClInclude Include="include\raygui.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Lab2.cpp" />
     <ClCompile Include="Lab_1.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
