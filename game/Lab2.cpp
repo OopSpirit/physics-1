@@ -31,7 +31,7 @@ public:
         DrawLineEx(position, position + velocity, 2, colour);
     }
 };
-std::vector<Object> objects;  // Andy is a circle
+std::vector<Object> objects;  
 class PhysicsSimulation {
 public:
     std::vector<Object> objects;
@@ -39,7 +39,7 @@ public:
     void update() {
         for (int i = 0;i < objects.size();i++) {
             objects[i].position += objects[i].velocity * dt;
-            objects[i].velocity += gravityAcceleration * dt;
+            objects[i].velocity += gravityAcceleration * dt; // v= v+g*dt
         }
     }
     void draw() {
@@ -67,7 +67,7 @@ void cleanup() {
 void update() {
     dt = 1.0f / TARGET_FPS;
     time += dt;
-    cleanup();
+    
     ps.update();
     if (IsKeyPressed(KEY_SPACE)) {
         Object bird;
@@ -78,7 +78,7 @@ void update() {
         ps.objects.push_back(bird);
         
     }
-   
+    cleanup();
 }
 void Draw() {
 
